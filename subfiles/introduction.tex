@@ -1,0 +1,35 @@
+% Copyright (c) 2023 Jesse Straat
+% 
+% This software is released under the MIT License.
+% https://opensource.org/licenses/MIT
+
+%!TeX root = introduction
+
+\documentclass[12pt]{article}
+
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\usepackage{scripts/preamble}
+
+\begin{document}
+	\section{Introduction}\label{sec:introduction}
+	This is an introductory story.
+	%
+	\subsection{Mathematical preliminaries}
+	You should know Category Theory for this thesis\cite{rudin_principles_1976}
+	%
+	\subsection{Notation and conventions}
+	Here, I introduce my conventions.
+    %
+	\subsubsection{A summary of mathematical notation}
+    Here is a table of mathematical notation that will be used in this thesis.\\
+	{\renewcommand\tabularxcolumn[1]{m{#1}}
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabularx}{\textwidth}{ c X }
+		\(\qed\) & This symbol denotes the end of a proof.
+	\end{tabularx}}
+	%
+	\subsection{Acknowledgements}
+	I would like to thank myself for making this template.
+\end{document}

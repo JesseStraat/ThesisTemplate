@@ -1,0 +1,35 @@
+\usepackage[lang = english, theme = false, numbering = section]{JesseTeX}
+\usepackage[natbib = true, style = phys, sorting = none,urldate=iso,date=iso]{biblatex}
+\addbibresource{../scripts/references.bib}
+
+\RequirePackage[plainpages = false, pdfpagelabels, citecolor = blue]{hyperref}						% Hyperlinks
+\RequirePackage[ocgcolorlinks]{ocgx2}			% This ensures hyperlinks aren't printed (ocgcolorlinks), while still being able to cover multiple lines (as opposed to ocgcolorlinks in hyperref)
+\usepackage[margin=2.5cm]{geometry}		% Change the shape of a page (custom margins etc.)
+
+\usepackage{imakeidx}
+
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\numberwithin{equation}{section}
+
+\emergencystretch 2em
+
+%%% This is about changing the headers and footers (i.e. Top and bottom of the page)
+\pagestyle{fancy}% use fancyheaders with the bar on the top
+\fancyhf{} % Clear the normal style
+\fancyhead[L]{\bfseries\leftmark} % this places the section number and name in the top left
+\fancyhead[R]{\bfseries\thepage} % this places the pagenumber in the top right
+
+\DeclareFieldFormat{titlecase}{#1}
+
+\let\DefOrig\definition
+\let\endDefOrig\enddefinition
+\renewenvironment{definition}
+{%
+	\begin{mdframed}[backgroundcolor=gray!15, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+	\DefOrig
+}
+{%
+	\endDefOrig
+	\end{mdframed}
+}%

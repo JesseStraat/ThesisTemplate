@@ -1,0 +1,26 @@
+% Copyright (c) 2023 Jesse Straat
+% 
+% This software is released under the MIT License.
+% https://opensource.org/licenses/MIT
+
+%!TeX root = abstract
+
+\documentclass[12pt]{article}
+
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+\usepackage{scripts/preamble}
+
+\begin{document}
+    \newgeometry{margin=2.5cm}
+	\begin{abstract}
+		\noindent
+		This is an abstract.
+	\end{abstract}
+	\vfill\strut
+	As you may have noticed, the image on the front page is, indeed, a duck.
+	%
+	\thispagestyle{plain} % Removes the fancyheader stuff
+	\restoregeometry % Resets geometry
+\end{document}
