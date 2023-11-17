@@ -13,16 +13,22 @@
 \usepackage{scripts/preamble}
 
 \begin{document}
-	\section{Introduction}\label{sec:introduction}
+	\section*{Introduction\markboth{Introduction}{}}
+	\addcontentsline{toc}{section}{\protect\numberline{}Introduction}		% Makes sure that the introduction has no number but is in table of contents
 	This is an introductory story.
 	%
-	\subsection{Mathematical preliminaries}
-	You should know Category Theory for this thesis\cite{rudin_principles_1976}
+	\clearpage
 	%
-	\subsection{Notation and conventions}
+	\subsection*{Organisation}
+	Here's what each chapter is going to be about.
+	%
+	\subsection*{Preliminaries}
+	You should know Category Theory for this thesis\cite{rudin_principles_1976}.
+	%
+	\subsection*{Notation and conventions}
 	Here, I introduce my conventions.
     %
-	\subsubsection{A summary of mathematical notation}
+	\subsubsection*{A summary of mathematical notation}
     Here is a table of mathematical notation that will be used in this thesis.\\
 	{\renewcommand\tabularxcolumn[1]{m{#1}}
 	\renewcommand{\arraystretch}{1.5}
@@ -30,6 +36,6 @@
 		\(\qed\) & This symbol denotes the end of a proof.
 	\end{tabularx}}
 	%
-	\subsection{Acknowledgements}
-	I would like to thank myself for making this template.
+	\subsection*{Acknowledgements}
+	I would like to thank myself for making this template. My cat deserves praise for being cute.
 \end{document}
