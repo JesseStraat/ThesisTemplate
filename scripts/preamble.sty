@@ -4,7 +4,9 @@
 		sorting = nty,
 		url=false,
 		giveninits=true,
-		maxbibnames=5
+		maxbibnames=5,
+		urldate=iso,
+		%date=iso
 		]{biblatex}
 \DeclareNameAlias{default}{family-given}
 \addbibresource{../scripts/references.bib}
@@ -33,6 +35,7 @@
 
 \DeclareFieldFormat{titlecase}{#1}
 
+%%% Puts definitions, theorems and propositions in boxes
 \let\DefOrig\definition
 \let\endDefOrig\enddefinition
 \renewenvironment{definition}
@@ -42,5 +45,27 @@
 }
 {%
 	\endDefOrig
+	\end{mdframed}
+}%
+\let\ThmOrig\theorem
+\let\endThmOrig\endtheorem
+\renewenvironment{theorem}
+{%
+	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+	\ThmOrig
+}
+{%
+	\endThmOrig
+	\end{mdframed}
+}%
+\let\PropOrig\proposition
+\let\endPropOrig\endproposition
+\renewenvironment{proposition}
+{%
+	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+	\PropOrig
+}
+{%
+	\endPropOrig
 	\end{mdframed}
 }%
