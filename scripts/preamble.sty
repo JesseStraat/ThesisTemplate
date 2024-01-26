@@ -77,15 +77,17 @@
 	% m: the name of the theorem
 	% o: optional parameter for environment
 	% m: the content of the theorem
+	%
+	% Defining global parameters for later reference
 	\expandafter\newcommand\csname thm@#2\endcsname{#4}%
 	\expandafter\def\csname thmdesc@#2\endcsname{#3}%
 	% As far as I know, xparse is incompatible with csname, so we need to do this:
 	\expandafter\let\expandafter\@temp\csname thmdesc@#2\endcsname%
-	\ExpandArgs{o}\IfValueTF{\@temp}{%
+	\ExpandArgs{o}\IfValueTF{\@temp}{% Check if theorem has optional arguments
 		\begin{#1}[\csname thmdesc@#2\endcsname]\label{#2}
 			\csname thm@#2\endcsname
 		\end{#1}
-	}{%
+	}{% No optionals
 		\begin{#1}\label{#2}
 			\csname thm@#2\endcsname
 		\end{#1}
@@ -93,24 +95,37 @@
 }
 
 \newcounter{old@counter}
-\NewDocumentCommand{\repthm}{ m m }{
+\NewDocumentCommand{\repthm}{ m m +o }{
 	% m: the type of theorem environment
 	% m: the name of the theorem
-	% o: optional parameter for environment
+	% o: alt text
 	\begingroup
-		\setcounter{old@counter}{\value{#1}}
+		\setcounter{old@counter}{\value{#1}}% Save theorem counter so we don't increase it
         \def\thetheorem{\ref{#2}}
-		% As far as I know, xparse is incompatible with csname, so we need to do this:
-		\expandafter\let\expandafter\@temp\csname thmdesc@#2\endcsname%
-        \ExpandArgs{o}\IfValueTF{\@temp}{%
-			\begin{#1}[\csname thmdesc@#2\endcsname]
-				\csname thm@#2\endcsname
-			\end{#1}
-		}{%
-			\begin{#1}
-				\csname thm@#2\endcsname
-			\end{#1}
-		}
-		\setcounter{#1}{\value{old@counter}}
+		%
+		\ifcsname thmdesc@#2\endcsname% Check if theorem is even defined
+			% Theorem is defined
+			% As far as I know, xparse is incompatible with csname, so we need to do this:
+			\expandafter\let\expandafter\@temp\csname thmdesc@#2\endcsname%
+			\ExpandArgs{o}\IfValueTF{\@temp}{% Check if theorem has optional arguments
+				\begin{#1}[\csname thmdesc@#2\endcsname]
+					\csname thm@#2\endcsname
+				\end{#1}
+			}{% No optionals
+				\begin{#1}
+					\csname thm@#2\endcsname
+				\end{#1}
+			}
+		\else
+			% Theorem isn't defined: produce alt text
+			\IfValueTF{#3}{
+				\begin{#1}
+					#3
+				\end{#1}
+			}{% No theorem or alt text provided: throw error
+				\PackageError{template}{Theorem #2 not defined}{Create the theorem using |\makethm| or consider adding alt text to |\repthm| using the optional parameter}
+			}
+		\fi
+		\setcounter{#1}{\value{old@counter}}% Reset theorem counter back to original
     \endgroup
 }
