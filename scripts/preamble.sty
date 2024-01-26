@@ -69,3 +69,40 @@
 	\endPropOrig
 	\end{mdframed}
 }%
+
+
+%% Theorem replication
+\NewDocumentCommand{\makethm}{ m m +m o }{
+	% m: the type of theorem environment
+	% m: the name of the theorem
+	% m: the content of the theorem
+	% o: optional parameter for environment
+	\expandafter\newcommand\csname thm@#2\endcsname{#3}%
+	\IfValueTF{#4}{%
+		\begin{#1}[#4]\label{#2}
+			\csname thm@#2\endcsname
+		\end{#1}
+	}{%
+		\begin{#1}\label{#2}
+			\csname thm@#2\endcsname
+		\end{#1}
+	}
+}
+
+\NewDocumentCommand{\repthm}{ m m o }{
+	% m: the type of theorem environment
+	% m: the name of the theorem
+	% o: optional parameter for environment
+	\begingroup
+        \def\thetheorem{\ref{#2}}
+        \IfValueTF{#3}{%
+			\begin{#1}[#3]
+				\csname thm@#2\endcsname
+			\end{#1}
+		}{%
+			\begin{#1}
+				\csname thm@#2\endcsname
+			\end{#1}
+		}
+    \endgroup
+}
