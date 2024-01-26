@@ -92,11 +92,13 @@
 	}
 }
 
+\newcounter{old@counter}
 \NewDocumentCommand{\repthm}{ m m }{
 	% m: the type of theorem environment
 	% m: the name of the theorem
 	% o: optional parameter for environment
 	\begingroup
+		\setcounter{old@counter}{\value{#1}}
         \def\thetheorem{\ref{#2}}
 		% As far as I know, xparse is incompatible with csname, so we need to do this:
 		\expandafter\let\expandafter\@temp\csname thmdesc@#2\endcsname%
@@ -109,5 +111,6 @@
 				\csname thm@#2\endcsname
 			\end{#1}
 		}
+		\setcounter{#1}{\value{old@counter}}
     \endgroup
 }
