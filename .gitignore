@@ -11,6 +11,7 @@
 *.out
 *.run.xml
 *.snm
+*.thm
 *.toc
 *.vrb
 *.pdf
