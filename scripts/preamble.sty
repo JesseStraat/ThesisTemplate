@@ -108,7 +108,8 @@
 		\expandafter\gdef\csname thmdesc@#2\endcsname{#3}%
 		\expandafter\write\expandafter\@auxout{%
 			\string\expandafter\string\long\string\expandafter\string\gdef\noexpand\csname thm@#2\string\endcsname{#4}%
-			\string\expandafter\string\expandafter\string\gdef\noexpand\csname thmdesc@#2\string\endcsname{#3}%%
+			^^J%
+			\string\expandafter\string\expandafter\string\gdef\noexpand\csname thmdesc@#2\string\endcsname{#3}%
 		}
 	\else
 		% We have a theorem file
