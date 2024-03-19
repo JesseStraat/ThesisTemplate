@@ -163,8 +163,10 @@
 				\begin{#1}
 					#3
 				\end{#1}
-			}{% No theorem or alt text provided: throw error
-				\PackageError{template}{Theorem #2 not defined}{Create the theorem using |\makethm| or consider adding alt text to |\repthm| using the optional parameter}
+			}{% No theorem or alt text provided: throw warning
+				\begin{#1}
+				\end{#1}
+				\PackageWarning{template}{Theorem #2 not defined; rebuild your project. If the issue persists, create the theorem using \makethm or consider adding alt text to \repthm using the optional parameter}
 			}
 		\fi
 		\setcounter{#1}{\value{old@counter}}% Reset theorem counter back to original
