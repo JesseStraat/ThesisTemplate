@@ -72,26 +72,46 @@
 
 
 %% Theorem replication
+
+\def\thesistemplate@theoremfile{\relax}
+\NewDocumentCommand{\theoremfile}{ m }{
+ 	\def\thesistemplate@theoremfile{exists}
+	\RequirePackage{pgfkeys}
+}
+
+\AtEndDocument{
+	\if\thesistemplate@theoremfile\relax
+	\else
+		\relax
+	\fi
+}
+
 \NewDocumentCommand{\makethm}{ m m o +m }{
 	% m: the type of theorem environment
 	% m: the name of the theorem
 	% o: optional parameter for environment
 	% m: the content of the theorem
 	%
-	% Defining global parameters for later reference
-	\expandafter\newcommand\csname thm@#2\endcsname{#4}%
-	\expandafter\def\csname thmdesc@#2\endcsname{#3}%
-	% As far as I know, xparse is incompatible with csname, so we need to do this:
-	\expandafter\let\expandafter\@temp\csname thmdesc@#2\endcsname%
-	\ExpandArgs{o}\IfValueTF{\@temp}{% Check if theorem has optional arguments
-		\begin{#1}[\csname thmdesc@#2\endcsname]\label{#2}
-			\csname thm@#2\endcsname
+	\IfValueTF{#3}{% Check if theorem has optional arguments
+		\begin{#1}[#3]\label{#2}
+			#4
 		\end{#1}
 	}{% No optionals
 		\begin{#1}\label{#2}
-			\csname thm@#2\endcsname
+			#4
 		\end{#1}
 	}
+	\if\thesistemplate@theoremfile\relax
+		% No file has been set
+		% Saving parameters to macros for later reference
+		\expandafter\long\expandafter\def\csname thm@#2\endcsname{#4}%
+		\expandafter\def\csname thmdesc@#2\endcsname{#3}%
+	\else
+		% We have a theorem file
+		% Saving parameters in pgfkeys
+		\pgfkeyssetvalue{/thesistemplate/#2/thm}{#4}
+		\pgfkeyssetvalue{/thesistemplate/#2/thmdesc}{#3}
+	\fi
 }
 
 \newcounter{old@counter}
@@ -102,22 +122,43 @@
 	\begingroup
 		\setcounter{old@counter}{\value{#1}}% Save theorem counter so we don't increase it
         \def\thetheorem{\ref{#2}}
+		\let\@@theoremnotdefined\relax
 		%
-		\ifcsname thmdesc@#2\endcsname% Check if theorem is even defined
-			% Theorem is defined
-			% As far as I know, xparse is incompatible with csname, so we need to do this:
-			\expandafter\let\expandafter\@temp\csname thmdesc@#2\endcsname%
-			\ExpandArgs{o}\IfValueTF{\@temp}{% Check if theorem has optional arguments
-				\begin{#1}[\csname thmdesc@#2\endcsname]
-					\csname thm@#2\endcsname
-				\end{#1}
-			}{% No optionals
-				\begin{#1}
-					\csname thm@#2\endcsname
-				\end{#1}
-			}
+		\if\thesistemplate@theoremfile\relax
+			% No file has been set
+			\ifcsname thm@#2\endcsname% Check if theorem is even defined
+				% Theorem is defined
+				\expandafter\let\expandafter\thmdesc\csname thmdesc@#2\endcsname%
+				\expandafter\let\expandafter\thm\csname thm@#2\endcsname
+			\else
+				% Theorem undefined
+				\let\@@theoremnotdefined 1
+			\fi
 		\else
-			% Theorem isn't defined: produce alt text
+			% We have a theorem file
+			\pgfkeysifdefined{/thesistemplate/#2/thm}{% Check if theorem is even defined
+				% Theorem is defined
+				\pgfkeysgetvalue{/thesistemplate/#2/thm}{\thm}
+				\pgfkeysgetvalue{/thesistemplate/#2/thmdesc}{\thmdesc}
+			}{
+				% Theorem undefined
+				\let\@@theoremnotdefined 1
+			}
+		\fi
+		\if\@@theoremnotdefined\relax
+			% Theorem is defined
+		\IfValueTF{\thmdesc}{% Check if theorem has name
+			\begin{#1}[\thmdesc]
+				\thm
+			\end{#1}
+		}{% No optionals
+			\begin{#1}
+				\thm
+			\end{#1}
+		}
+			
+		\else
+			% Theorem not defined: produce alt text
 			\IfValueTF{#3}{
 				\begin{#1}
 					#3
