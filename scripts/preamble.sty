@@ -104,8 +104,12 @@
 	\if\thesistemplate@theoremfile\relax
 		% No file has been set
 		% Saving parameters to macros for later reference
-		\expandafter\long\expandafter\def\csname thm@#2\endcsname{#4}%
-		\expandafter\def\csname thmdesc@#2\endcsname{#3}%
+		\expandafter\long\expandafter\gdef\csname thm@#2\endcsname{#4}%
+		\expandafter\gdef\csname thmdesc@#2\endcsname{#3}%
+		\expandafter\write\expandafter\@auxout{%
+			\string\expandafter\string\long\string\expandafter\string\gdef\noexpand\csname thm@#2\string\endcsname{#4}%
+			\string\expandafter\string\expandafter\string\gdef\noexpand\csname thmdesc@#2\string\endcsname{#3}%%
+		}
 	\else
 		% We have a theorem file
 		% Saving parameters in pgfkeys
@@ -128,7 +132,7 @@
 			% No file has been set
 			\ifcsname thm@#2\endcsname% Check if theorem is even defined
 				% Theorem is defined
-				\expandafter\let\expandafter\thmdesc\csname thmdesc@#2\endcsname%
+				\expandafter\edef\expandafter\thmdesc{\csname thmdesc@#2\endcsname}%
 				\expandafter\let\expandafter\thm\csname thm@#2\endcsname
 			\else
 				% Theorem undefined
@@ -147,15 +151,15 @@
 		\fi
 		\if\@@theoremnotdefined\relax
 			% Theorem is defined
-		\IfValueTF{\thmdesc}{% Check if theorem has name
-			\begin{#1}[\thmdesc]
-				\thm
-			\end{#1}
-		}{% No optionals
-			\begin{#1}
-				\thm
-			\end{#1}
-		}
+			\IfValueTF{\thmdesc}{% Check if theorem has name
+				\begin{#1}[\thmdesc]
+					\thm
+				\end{#1}
+			}{% No optionals
+				\begin{#1}
+					\thm
+				\end{#1}
+			}
 			
 		\else
 			% Theorem not defined: produce alt text
