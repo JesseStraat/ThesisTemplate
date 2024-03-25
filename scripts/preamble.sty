@@ -87,7 +87,11 @@
 
 % Import theorems file
 \NewDocumentCommand{\loadtheorems}{ m }{
-	\input{#1}
+	\IfFileExists{#1}{
+		\input{#1}
+	}{
+		\PackageWarning{template}{File #1 not found. I will not import any theorems.}
+	}
 }
 
 \NewDocumentCommand{\makethm}{ m m o +m }{
@@ -165,4 +169,4 @@
 
 
 % Implementing functions into actual preamble
-\loadtheorems{main/thesis.thm}
+\AtBeginDocument{\loadtheorems{main/thesis.thm}}
