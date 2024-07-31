@@ -18,6 +18,18 @@
 \emergencystretch 2em
 
 %%% This is about changing the headers and footers (i.e. Top and bottom of the page)
+% Save chapters and sections to later add to header
+\def\chaptermark#1{%
+    \markboth {%
+        #1}{}}%
+\def\sectionmark#1{%
+    \markright {%
+        \ifnum \c@secnumdepth >\z@
+            \thesection\ --- \ %
+        \fi
+        #1}}
+
+% Actual headers and footers %
 \pagestyle{fancy}% use fancyheaders with the bar on the top
 \fancyhf{} % Clear the normal style
 \fancyhead[RE]{\bfseries\leftmark} % this places the section number and name in the top left
@@ -27,6 +39,7 @@
 \setlength{\headheight}{24pt}
 \fancypagestyle{plain}{}
 
+% Give empty pages different style %
 \fancypagestyle{emptypg}{%
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
