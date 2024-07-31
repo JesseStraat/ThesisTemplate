@@ -53,11 +53,6 @@
 
 
 %% Macros %%
-
-\NewDocumentCommand{\cleartooddpage}{}{
-	\clearpage
-	\ifodd\value{page}\else\null\clearpage\fi
-}
 \NewDocumentCommand{\numberthis}{}{
 	\addtocounter{equation}{1}\tag{\theequation}
 }
