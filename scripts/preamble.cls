@@ -52,9 +52,9 @@
     \newpage
     \if@twocolumn\hbox{}\newpage\fi\fi\fi
 }
-\@openrighttrue
 
-\DeclareFieldFormat{titlecase}{#1}
+% Chapters must start on odd pages %
+\@openrighttrue
 
 
 % Implementing functions into actual preamble
