@@ -20,10 +20,26 @@
 %%% This is about changing the headers and footers (i.e. Top and bottom of the page)
 \pagestyle{fancy}% use fancyheaders with the bar on the top
 \fancyhf{} % Clear the normal style
-\fancyhead[L]{\bfseries\leftmark} % this places the section number and name in the top left
-\fancyhead[R]{\bfseries\thepage} % this places the pagenumber in the top right
+\fancyhead[RE]{\bfseries\leftmark} % this places the section number and name in the top left
+\fancyhead[RO,LE]{\bfseries\thepage} % page number
 % Changing headheight to fit what's inside %
+\fancyhead[LO]{\bfseries\rightmark}
 \setlength{\headheight}{24pt}
+\fancypagestyle{plain}{}
+
+\fancypagestyle{emptypg}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead[RO,LE]{\bfseries\thepage}
+}
+\renewcommand\cleardoublepage{%
+    \clearpage\if@twoside \ifodd\c@page\else
+    \hbox{}
+    \thispagestyle{emptypg}
+    \newpage
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi
+}
+\@openrighttrue
 
 \DeclareFieldFormat{titlecase}{#1}
 
