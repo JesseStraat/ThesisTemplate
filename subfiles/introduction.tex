@@ -5,7 +5,7 @@
 
 %!TeX root = introduction
 
-\documentclass[12pt]{article}
+\documentclass[12pt]{report}
 
 \makeatletter
 \def\input@path{{../}}
@@ -13,7 +13,7 @@
 \usepackage{scripts/preamble}
 
 \begin{document}
-	\section*{Introduction\markboth{Introduction}{}}
+	\chapter*{Introduction\markboth{Introduction}{}}
 	\addcontentsline{toc}{section}{\protect\numberline{}Introduction}		% Makes sure that the introduction has no number but is in table of contents
 	This is an introductory story.
 	%
@@ -38,10 +38,10 @@
 	%
 	\subsection*{Acknowledgements}
 	I would like to thank myself for making this template. My cat deserves praise for being cute.
-	\repthm{theorem}{thm:stest}
+	\repthm{thm:stest}
 	\begin{makethm}{theorem}{thm:stest}[a]
 		TEST\\TEST\par TEST
 	\end{makethm}
-	\repthm{theorem}{thm:sstest}
-	\repthm{theorem}{thm:ssstest}[Remove this alt text for a fun warning]
+	\repthm{thm:sstest}
+	\repthm{thm:ssstest}[Remove this alt text for a fun warning]
 \end{document}

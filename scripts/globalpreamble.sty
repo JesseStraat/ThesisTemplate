@@ -1,0 +1,145 @@
+%% This preamble is split from preamble.sty
+%% to allow it being used in, for example,
+%% a beamer presentation
+
+%% Base packages %%
+\usepackage{xcolor}								% Helps with colour definitions
+\usepackage[english]{babel}				        % Language-related things
+\usepackage{csquotes}
+\usepackage{graphicx}							% Adding images
+\usepackage{caption}							% Used primarily for subfigures
+\usepackage{subcaption}							% Ditto
+\usepackage{amsmath}							% Some mathematical symbols
+\usepackage{amsfonts}							% Ditto
+\usepackage{amssymb}							% Ditto
+\usepackage{mathrsfs}							% Mathscr symbols
+\usepackage{mathtools}							% More mathematical symbols, e.g., for proofs
+\usepackage{wasysym}							% Ditto
+\usepackage{amsthm}								% Theorem environments (for proofs)
+\usepackage{thmtools}							% Some tools for defining theorems
+\usepackage{textcomp}							% Text symbols
+\usepackage{comment}							% Allows a comment environment for multi-line comments
+\usepackage{tabularx}							% Allows prettier tabular environments
+
+
+%% QOL improvements %%
+
+% Swapping \epsilon and \varepsilon %
+\let\temp\epsilon
+\let\epsilon\varepsilon
+\let\varepsilon\temp
+
+% Swapping \phi and \varphi%
+\let\temp\phi
+\let\phi\varphi
+\let\varphi\temp
+
+% Adding \vu as alternative to \nu (for people who actually speak Greek)
+\let\vu\nu
+
+% Some sets %
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\Id}{\operatorname{Id}}
+
+% Norm and absolute value
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+
+
+%% Macros %%
+
+\NewDocumentCommand{\cleartooddpage}{}{
+	\clearpage
+	\ifodd\value{page}\else\null\clearpage\fi
+}
+\NewDocumentCommand{\numberthis}{}{
+	\addtocounter{equation}{1}\tag{\theequation}
+}
+
+
+%% Theorems %%
+\@ifclassloaded{beamer}{}{		%Beamer already loads these environments
+	\newtheorem{proposition}{Proposition}[chapter]
+	\newtheorem*{proposition*}{Proposition}
+	
+	\newtheorem{lemma}[proposition]{Lemma}
+	\newtheorem*{lemma*}{Lemma}
+	
+	\newtheorem{definition}[proposition]{Definition}
+	\newtheorem*{definition*}{Definition}
+	
+	\newtheorem{theorem}[proposition]{Theorem}
+	\newtheorem*{theorem*}{Theorem}
+	
+	\newtheorem{claim}[proposition]{Claim}
+	\newtheorem*{claim*}{Claim}
+	
+	\newtheorem{corollary}[proposition]{Corollary}
+	\newtheorem*{corollary*}{Corollary}
+	
+	\declaretheoremstyle[headfont=\normalfont\bfseries,notefont=\itshape, headpunct=.,bodyfont=\normalfont,spacebelow=1em]{example}
+	
+	\declaretheorem[sibling=proposition,style=example,name=Example]{example}
+	\declaretheorem[numbered=no,style=example,name=Example]{example*}
+
+	\declaretheorem[sibling=proposition,style=example,name=Remark]{remark}
+	\declaretheorem[numbered=no,style=example,name=Remark]{remark*}
+}
+
+% Add boxes around some environments %
+
+\usepackage{mdframed}                           % Makes boxes around definitions
+\let\DefOrig\definition
+\let\endDefOrig\enddefinition
+\renewenvironment{definition}
+{%
+	\begin{mdframed}[backgroundcolor=gray!15, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+	\DefOrig
+}
+{%
+	\endDefOrig
+	\end{mdframed}
+}%
+\let\ThmOrig\theorem
+\let\endThmOrig\endtheorem
+\renewenvironment{theorem}
+{%
+	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+	\ThmOrig
+}
+{%
+	\endThmOrig
+	\end{mdframed}
+}%
+\let\PropOrig\proposition
+\let\endPropOrig\endproposition
+\renewenvironment{proposition}
+{%
+	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+	\PropOrig
+}
+{%
+	\endPropOrig
+	\end{mdframed}
+}%
+
+
+%% Bibliography %%
+\usepackage[natbib = true,
+		style = alphabetic,
+		sorting = nty,
+		url=false,
+		giveninits=true,
+		maxbibnames=5,
+		urldate=iso,
+		seconds=true,
+		%date=iso
+		]{biblatex}
+\DeclareNameAlias{default}{family-given}
+\addbibresource{../scripts/references.bib}

@@ -1,29 +1,16 @@
-\usepackage[lang = english, theme = false, numbering = section]{JesseTeX}
-\usepackage[natbib = true,
-		style = alphabetic,
-		sorting = nty,
-		url=false,
-		giveninits=true,
-		maxbibnames=5,
-		urldate=iso,
-		seconds=true,
-		%date=iso
-		]{biblatex}
+\usepackage{../scripts/globalpreamble}
 \usepackage{reptheorem}							% Theorem replication
-\DeclareNameAlias{default}{family-given}
-\addbibresource{../scripts/references.bib}
 
 \RequirePackage[plainpages = false, pdfpagelabels, citecolor = blue]{hyperref}						% Hyperlinks
 \RequirePackage[ocgcolorlinks]{ocgx2}			% This ensures hyperlinks aren't printed (ocgcolorlinks), while still being able to cover multiple lines (as opposed to ocgcolorlinks in hyperref)
 \usepackage[a4paper,margin=2.5cm]{geometry}		% Change the shape of a page (custom margins etc.)
 
-\usepackage{imakeidx}
-\usepackage{mdframed}                           % Makes boxes around definitions
-\usepackage{fancyhdr}
+\usepackage{imakeidx}							% Index
+\usepackage{fancyhdr}							% Nicer layout
 
-\counterwithin{figure}{section}
-\counterwithin{table}{section}
-\numberwithin{equation}{section}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+\numberwithin{equation}{chapter}
 
 \emergencystretch 2em
 
@@ -36,41 +23,6 @@
 \setlength{\headheight}{24pt}
 
 \DeclareFieldFormat{titlecase}{#1}
-
-%%% Puts definitions, theorems and propositions in boxes
-\let\DefOrig\definition
-\let\endDefOrig\enddefinition
-\renewenvironment{definition}
-{%
-	\begin{mdframed}[backgroundcolor=gray!15, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
-	\DefOrig
-}
-{%
-	\endDefOrig
-	\end{mdframed}
-}%
-\let\ThmOrig\theorem
-\let\endThmOrig\endtheorem
-\renewenvironment{theorem}
-{%
-	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
-	\ThmOrig
-}
-{%
-	\endThmOrig
-	\end{mdframed}
-}%
-\let\PropOrig\proposition
-\let\endPropOrig\endproposition
-\renewenvironment{proposition}
-{%
-	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
-	\PropOrig
-}
-{%
-	\endPropOrig
-	\end{mdframed}
-}%
 
 
 % Implementing functions into actual preamble
