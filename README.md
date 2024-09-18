@@ -32,6 +32,12 @@ The file containing all theorems is only updated when `thesis.tex` is run, so ma
 
 For more information, see https://ctan.org/pkg/reptheorem.
 
+## Metadata
+
+This template uses `hyperxmp` to set the metadata of your document. You can find and set the metadata under `metadata.sty`.
+
+For more information, see https://ctan.org/pkg/hyperxmp.
+
 ## Logos
 
 I do not own the Utrecht University logo, nor can I give anyone permission to use it. For more information, see [here](https://www.uu.nl/en/organisation/corporate-identity/guidelines/logo)

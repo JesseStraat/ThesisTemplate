@@ -4,6 +4,7 @@
 \usepackage{reptheorem}							% Theorem replication
 
 \RequirePackage[plainpages = false, pdfpagelabels, citecolor = blue]{hyperref}						% Hyperlinks
+\RequirePackage{scripts/metadata}
 \RequirePackage[ocgcolorlinks]{ocgx2}			% This ensures hyperlinks aren't printed (ocgcolorlinks), while still being able to cover multiple lines (as opposed to ocgcolorlinks in hyperref)
 \usepackage[a4paper,margin=2.5cm]{geometry}		% Change the shape of a page (custom margins etc.)
 
