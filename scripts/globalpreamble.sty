@@ -85,44 +85,44 @@
 
 	\declaretheorem[sibling=proposition,style=example,name=Remark]{remark}
 	\declaretheorem[numbered=no,style=example,name=Remark]{remark*}
-}
 
-% Add boxes around some environments %
-
-\usepackage{mdframed}                           % Makes boxes around definitions
-\let\DefOrig\definition
-\let\endDefOrig\enddefinition
-\renewenvironment{definition}
-{%
-	\begin{mdframed}[backgroundcolor=gray!15, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
-	\DefOrig
+	% Add boxes around some environments %
+	
+	\usepackage{mdframed}                           % Makes boxes around definitions
+	\let\DefOrig\definition
+	\let\endDefOrig\enddefinition
+	\renewenvironment{definition}
+	{%
+		\begin{mdframed}[backgroundcolor=gray!15, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+		\DefOrig
+	}
+	{%
+		\endDefOrig
+		\end{mdframed}
+	}%
+	\let\ThmOrig\theorem
+	\let\endThmOrig\endtheorem
+	\renewenvironment{theorem}
+	{%
+		\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+		\ThmOrig
+	}
+	{%
+		\endThmOrig
+		\end{mdframed}
+	}%
+	\let\PropOrig\proposition
+	\let\endPropOrig\endproposition
+	\renewenvironment{proposition}
+	{%
+		\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+		\PropOrig
+	}
+	{%
+		\endPropOrig
+		\end{mdframed}
+	}%
 }
-{%
-	\endDefOrig
-	\end{mdframed}
-}%
-\let\ThmOrig\theorem
-\let\endThmOrig\endtheorem
-\renewenvironment{theorem}
-{%
-	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
-	\ThmOrig
-}
-{%
-	\endThmOrig
-	\end{mdframed}
-}%
-\let\PropOrig\proposition
-\let\endPropOrig\endproposition
-\renewenvironment{proposition}
-{%
-	\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
-	\PropOrig
-}
-{%
-	\endPropOrig
-	\end{mdframed}
-}%
 
 
 %% Bibliography %%
