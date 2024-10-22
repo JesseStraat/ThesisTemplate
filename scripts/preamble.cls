@@ -25,7 +25,7 @@
 \def\sectionmark#1{%
     \markright {%
         \ifnum \c@secnumdepth >\z@
-            \thesection\ --- \ %
+            \thesection\ --- %
         \fi
         #1}}
 
