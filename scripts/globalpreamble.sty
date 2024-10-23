@@ -65,14 +65,15 @@
 
 %% Theorems %%
 \@ifclassloaded{beamer}{}{		%Beamer already loads these environments
+	
+	\declaretheoremstyle[bodyfont=\slshape]{normalsl}
+	\theoremstyle{normalsl}
+
 	\newtheorem{proposition}{Proposition}[chapter]
 	\newtheorem*{proposition*}{Proposition}
 	
 	\newtheorem{lemma}[proposition]{Lemma}
 	\newtheorem*{lemma*}{Lemma}
-	
-	\newtheorem{definition}[proposition]{Definition}
-	\newtheorem*{definition*}{Definition}
 	
 	\newtheorem{theorem}[proposition]{Theorem}
 	\newtheorem*{theorem*}{Theorem}
@@ -83,49 +84,55 @@
 	\newtheorem{corollary}[proposition]{Corollary}
 	\newtheorem*{corollary*}{Corollary}
 	
-	\declaretheoremstyle[headfont=\normalfont\bfseries,notefont=\itshape, headpunct=.,bodyfont=\normalfont,spacebelow=1em]{example}
-	
-	\declaretheorem[sibling=proposition,style=example,name=Example]{example}
-	\declaretheorem[numbered=no,style=example,name=Example]{example*}
+	\theoremstyle{definition}
 
-	\declaretheorem[sibling=proposition,style=example,name=Remark]{remark}
-	\declaretheorem[numbered=no,style=example,name=Remark]{remark*}
+	\newtheorem{definition}[proposition]{Definition}
+	\newtheorem*{definition*}{Definition}
+
+	\theoremstyle{remark}
+
+	\newtheorem{remark}[proposition]{Remark}
+	\newtheorem*{remark*}{Remark}
+
+	\newtheorem{example}[proposition]{Example}
+	\newtheorem*{example*}{Example}
 
 	% Add boxes around some environments %
 	
-	\usepackage{mdframed}                           % Makes boxes around definitions
+	\usepackage{tcolorbox}                           % Makes boxes around definitions
+	\tcbuselibrary{breakable}
 	\let\DefOrig\definition
 	\let\endDefOrig\enddefinition
 	\renewenvironment{definition}
 	{%
-		\begin{mdframed}[backgroundcolor=gray!15, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+		\begin{tcolorbox}[breakable,colback=gray!15,sharp corners,boxrule=0pt,opacityframe=0]
 		\DefOrig
 	}
 	{%
 		\endDefOrig
-		\end{mdframed}
+		\end{tcolorbox}
 	}%
 	\let\ThmOrig\theorem
 	\let\endThmOrig\endtheorem
 	\renewenvironment{theorem}
 	{%
-		\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0]
 		\ThmOrig
 	}
 	{%
 		\endThmOrig
-		\end{mdframed}
+		\end{tcolorbox}
 	}%
 	\let\PropOrig\proposition
 	\let\endPropOrig\endproposition
 	\renewenvironment{proposition}
 	{%
-		\begin{mdframed}[backgroundcolor=gray!30, hidealllines=true, innertopmargin = -5pt, splittopskip=\baselineskip]
+		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0]
 		\PropOrig
 	}
 	{%
 		\endPropOrig
-		\end{mdframed}
+		\end{tcolorbox}
 	}%
 }
 
