@@ -59,3 +59,7 @@
 
 % Implementing functions into actual preamble
 \AtBeginDocument{\loadtheorems{main/thesis.thm}}
+
+
+
+%% ADD YOUR OWN CODE HERE %%
