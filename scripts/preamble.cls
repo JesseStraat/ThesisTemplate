@@ -60,6 +60,14 @@
 % Implementing functions into actual preamble
 \AtBeginDocument{\loadtheorems{main/thesis.thm}}
 
+% Changes font of emph
+\renewcommand{\emph}[1]{%
+    \ifindefinition%
+        \textbf{#1}%
+    \else%
+        \textsl{#1}%
+    \fi%
+}
 
 
 %% ADD YOUR OWN CODE HERE %%
