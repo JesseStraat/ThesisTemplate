@@ -104,7 +104,7 @@
 	\renewenvironment{definition}
 	{%	
 		\indefinitiontrue
-		\begin{tcolorbox}[breakable,colback=gray!15,sharp corners,boxrule=0pt,opacityframe=0]
+		\begin{tcolorbox}[breakable,colback=gray!15,sharp corners,boxrule=0pt,opacityframe=0,parbox=false]
 		\DefOrig
 	}
 	{%
@@ -116,7 +116,7 @@
 	\let\endThmOrig\endtheorem
 	\renewenvironment{theorem}
 	{%
-		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0]
+		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0,parbox=false]
 		\ThmOrig
 	}
 	{%
@@ -127,7 +127,7 @@
 	\let\endPropOrig\endproposition
 	\renewenvironment{proposition}
 	{%
-		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0]
+		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0,parbox=false]
 		\PropOrig
 	}
 	{%
