@@ -100,14 +100,17 @@
 	\tcbuselibrary{breakable}
 	\let\DefOrig\definition
 	\let\endDefOrig\enddefinition
+	\newif\ifindefinition
 	\renewenvironment{definition}
-	{%
+	{%	
+		\indefinitiontrue
 		\begin{tcolorbox}[breakable,colback=gray!15,sharp corners,boxrule=0pt,opacityframe=0]
 		\DefOrig
 	}
 	{%
 		\endDefOrig
 		\end{tcolorbox}
+		\indefinitionfalse
 	}%
 	\let\ThmOrig\theorem
 	\let\endThmOrig\endtheorem
