@@ -1,6 +1,6 @@
 \LoadClass[12pt,twoside]{report}
 
-\usepackage{../scripts/globalpreamble}
+\usepackage{scripts/globalpreamble}
 \usepackage{reptheorem}							% Theorem replication
 
 \RequirePackage{scripts/metadata}
