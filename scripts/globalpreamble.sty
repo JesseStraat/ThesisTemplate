@@ -63,6 +63,15 @@
 %% Theorems %%
 \@ifclassloaded{beamer}{}{		%Beamer already loads these environments
 	
+	% Redefine hyperref anchors of theorems to include chapter %
+	% This is a known bug of thmtools: https://github.com/muzimuzhi/thmtools/issues/70
+	% If this has been fixed, simply remove this line
+	\g@addto@macro\thmt@newtheorem@postdefinition{%
+		\ifthmt@isstarred\relax\else%
+			\expandafter\renewcommand\csname theH\thmt@envname\endcsname{\thechapter.\arabic{\thmt@envname}}%
+		\fi%
+	}
+	
 	\declaretheoremstyle[bodyfont=\slshape]{normalsl}
 	\theoremstyle{normalsl}
 
@@ -95,6 +104,9 @@
 	\newtheorem*{example*}{Example}
 
 	% Add boxes around some environments %
+
+	% Ideally, each of the below tcolorboxes would have the option parbox=false. Sadly, due to a bug, this is incompatible
+	% with hyperref. If this is ever fixed in the future, add the option back
 	
 	\usepackage{tcolorbox}                           % Makes boxes around definitions
 	\tcbuselibrary{breakable}
@@ -104,7 +116,7 @@
 	\renewenvironment{definition}
 	{%	
 		\indefinitiontrue
-		\begin{tcolorbox}[breakable,colback=gray!15,sharp corners,boxrule=0pt,opacityframe=0,parbox=false]
+		\begin{tcolorbox}[breakable,colback=gray!15,sharp corners,boxrule=0pt,opacityframe=0]
 		\DefOrig
 	}
 	{%
@@ -116,7 +128,7 @@
 	\let\endThmOrig\endtheorem
 	\renewenvironment{theorem}
 	{%
-		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0,parbox=false]
+		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0]
 		\ThmOrig
 	}
 	{%
@@ -127,7 +139,7 @@
 	\let\endPropOrig\endproposition
 	\renewenvironment{proposition}
 	{%
-		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0,parbox=false]
+		\begin{tcolorbox}[breakable,colback=gray!30,sharp corners,boxrule=0pt,opacityframe=0]
 		\PropOrig
 	}
 	{%
