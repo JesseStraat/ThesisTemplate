@@ -29,6 +29,11 @@
         \fi
         #1}}
 
+% Makes index and bibliography mark normalcase
+\indexsetup{headers={\indexname}{\indexname}}
+\def\abx@MakeMarkcase{}
+        
+
 % Actual headers and footers %
 \pagestyle{fancy}% use fancyheaders with the bar on the top
 \fancyhf{} % Clear the normal style
